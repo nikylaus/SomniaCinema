@@ -32,7 +32,7 @@ public class Prenotazione implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private Date data;
-	private Integer valuazione;
+	private Integer valutazione;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_account")
@@ -52,11 +52,11 @@ public class Prenotazione implements Serializable{
 	public Prenotazione() {
 	}
 
-	public Prenotazione(Integer id, Date data, Integer valuazione, Account account, Proiezione proiezione,
+	public Prenotazione(Integer id, Date data, Integer valutazione, Account account, Proiezione proiezione,
 			Posto posto) {
 		this.id = id;
 		this.data = data;
-		this.valuazione = valuazione; 
+		this.valutazione = valutazione; 
 		this.accountPrenotazione = account;
 		this.proiezione = proiezione;
 		this.posto = posto;
@@ -78,12 +78,12 @@ public class Prenotazione implements Serializable{
 		this.data = data;
 	}
 
-	public Integer getValuazione() {
-		return valuazione;
+	public Integer getValutazione() {
+		return valutazione;
 	}
 
-	public void setValuazione(Integer valuazione) {
-		this.valuazione = valuazione;
+	public void setvalutazione(Integer valutazione) {
+		this.valutazione = valutazione;
 	}
 
 	public Account getAccountPrenotazione() {
@@ -112,7 +112,7 @@ public class Prenotazione implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Prenotazione [id=" + id + ", data=" + data + ", valuazione=" + valuazione + ", account=" + accountPrenotazione
+		return "Prenotazione [id=" + id + ", data=" + data + ", valuazione=" + valutazione + ", account=" + accountPrenotazione
 				+ ", proiezione=" + proiezione + ", posto=" + posto + "]";
 	}
 	

@@ -53,6 +53,8 @@ public class AccountController {
 			accountDto.setId(account.getId());
 			accountDto.setPass(account.getPass());
 			accountDto.setUsername(account.getUsername());
+			accountDto.setPrenotazioni(account.getPrenotazioni());
+			accountDto.setRuoli(account.getRuoli());
 			listDto.add(accountDto);
 		}
 		return new ResponseEntity <List<AccountDTO>>(listDto, HttpStatus.OK);
