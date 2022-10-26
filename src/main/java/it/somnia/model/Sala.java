@@ -37,7 +37,7 @@ public class Sala implements Serializable{
 	
 	@OneToMany(mappedBy = "sala", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	//@JsonManagedReference /* permette di vedere i posti di ogni sala */
-	//@JsonIgnore
+	@JsonIgnore
 	private Set<Posto> posti = new HashSet<Posto>();
 	
 	@OneToMany(mappedBy = "salaProiezione", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

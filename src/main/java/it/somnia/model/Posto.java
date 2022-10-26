@@ -36,10 +36,10 @@ public class Posto implements Serializable{
 	private Integer numeroPosto;
 	private String condizione;
 	
-	@ToString.Exclude
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_sala")
-	//@JsonBackReference
+	@JsonBackReference
 	private Sala sala;
 	
 	@OneToMany(mappedBy = "posto", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

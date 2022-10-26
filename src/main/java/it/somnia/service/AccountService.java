@@ -1,5 +1,6 @@
 package it.somnia.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,8 @@ public class AccountService implements IAccountService {
 	private AccountRepository repository;
 	
 	@Override
-	public Iterable<Account> getAllAccount() {
-		return repository.findAll();
+	public List<Account> getAllAccount() {
+		return (List<Account>) repository.findAll();
 	}
 
 	@Override

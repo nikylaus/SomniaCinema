@@ -1,9 +1,11 @@
 package it.somnia.service;
 
+import java.util.List;
+
 import it.somnia.model.Account;
 
 public interface IAccountService {
-	public Iterable<Account> getAllAccount();
+	public List<Account> getAllAccount();
 	public Account getAccountById(Integer id);
 	public Account addAccount(Account account);
 	public Account updateAccount(Integer id, Account account);
