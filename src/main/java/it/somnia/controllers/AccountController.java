@@ -50,6 +50,7 @@ public class AccountController {
 			accountDto.setDataNascita(account.getDataNascita());
 			accountDto.setEmail(account.getEmail());
 			accountDto.setImg(account.getImg());
+			accountDto.setId(account.getId());
 			accountDto.setPass(account.getPass());
 			accountDto.setUsername(account.getUsername());
 			listDto.add(accountDto);
