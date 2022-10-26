@@ -61,12 +61,22 @@ public class AccountController {
 	}
 
 	@GetMapping("/api/account/{id}")
-	public Account getById(@PathVariable Integer id) {
+	public AccountDTO getById(@PathVariable Integer id) {
 		Account account = service.getAccountById(id);
 		if (account == null) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account non trovato");
 		}
-		return account;
+		AccountDTO accountDto = new AccountDTO();
+		accountDto.setDataIscrizione(account.getDataIscrizione());
+		accountDto.setDataNascita(account.getDataNascita());
+		accountDto.setEmail(account.getEmail());
+		accountDto.setImg(account.getImg());
+		accountDto.setId(account.getId());
+		accountDto.setPass(account.getPass());
+		accountDto.setUsername(account.getUsername());
+		accountDto.setPrenotazioni(account.getPrenotazioni());
+		accountDto.setRuoli(account.getRuoli());
+		return accountDto;
 	}
 
 	@PostMapping("/admin/api/account/save") 
