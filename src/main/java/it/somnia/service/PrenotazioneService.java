@@ -37,7 +37,7 @@ public class PrenotazioneService implements IPrenotazioneService {
 	public Prenotazione updatePrenotazione(Integer id, Prenotazione prenotazione) {
 		Optional<Prenotazione> prenotazioneOpt = repository.findById(id);
 		if (prenotazioneOpt.isEmpty() == false) {
-			prenotazioneOpt.get().setValuazione(prenotazione.getValuazione());
+			prenotazioneOpt.get().setValutazione(prenotazione.getValutazione());
 			repository.save(prenotazioneOpt.get());
 			return prenotazioneOpt.get();
 		}

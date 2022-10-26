@@ -82,7 +82,7 @@ public class Prenotazione implements Serializable{
 		return valutazione;
 	}
 
-	public void setvalutazione(Integer valutazione) {
+	public void setValutazione(Integer valutazione) {
 		this.valutazione = valutazione;
 	}
 
