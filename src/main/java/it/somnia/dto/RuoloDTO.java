@@ -1,6 +1,10 @@
 package it.somnia.dto;
 
 
+import java.util.HashSet;
+import java.util.Set;
+
+import it.somnia.model.Account;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,20 +18,6 @@ public class RuoloDTO {
 	
 	private Integer id;
 	private String nome;
-	
-//	@ManyToMany(fetch = FetchType.LAZY,  
-//			cascade = CascadeType.MERGE) 
-//	@JoinTable(name = "ruoli_account",
-//	joinColumns = {  
-//			@JoinColumn(name = "id_ruolo",   
-//					referencedColumnName = "id") 
-//	},  
-//	inverseJoinColumns = {  
-//			@JoinColumn(name = "id_account",   
-//					referencedColumnName = "id") 
-//	}) 
-//	@JsonBackReference /* visualizza solo i ruoli */
-//	//@JsonManagedReference
-//	private Set<Account> account = new HashSet<Account>();
+	private Set<Account> account = new HashSet<Account>();
 
 }

@@ -27,12 +27,8 @@ public class AccountDTO {
 	private Date dataIscrizione;
 	private Date dataNascita;
 	
-//	@OneToMany(mappedBy = "accountPrenotazione", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//	@JsonManagedReference /* consente di vedere l'account insieme alle prenotazioni */
 	private Set<Prenotazione> prenotazioni = new HashSet<Prenotazione>();
-//	
-//	@ManyToMany(mappedBy = "account")
-//	@JsonManagedReference /* consente di vedere l'account insieme ai ruoli */
+
 	private Set<Ruolo> ruoli = new HashSet<Ruolo>();
 
 }
