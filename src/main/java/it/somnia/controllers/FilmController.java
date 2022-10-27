@@ -2,6 +2,7 @@ package it.somnia.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import it.somnia.dto.FilmDTOOutProiezioni;
 import it.somnia.model.Film;
 import it.somnia.service.FilmService;
 
@@ -45,12 +47,27 @@ public class FilmController {
 	}
 
 	@PutMapping("/admin/api/film/update/{id}")
-	public Film update(@PathVariable Integer id, @RequestBody Film film) {
-		Film fil = service.updateFilm(id, film);
+	public ResponseEntity <FilmDTOOutProiezioni> update(@PathVariable Integer id, @RequestBody FilmDTOOutProiezioni film) {
+		Film fil = new Film();
+		fil.setAnno(film.getAnno());
+		fil.setCast(film.getCast());
+		fil.setCondizione(film.getCondizione());
+		fil.setDescrizione(film.getDescrizione());
+		fil.setDurata(film.getDurata());
+		fil.setEtaMinima(film.getEtaMinima());
+		fil.setGenere(film.getGenere());
+		fil.setImg(film.getImg());
+		fil.setImgBannerDue(film.getImgBannerDue());
+		fil.setImgBannerTre(film.getImgBannerTre());
+		fil.setImgBannerUno(film.getImgBannerUno());
+		fil.setNome(film.getNome());
+		fil.setRegia(film.getRegia());
+		fil.setUrlTrailer(film.getUrlTrailer());
+		service.updateFilm(id, fil);
 		if (fil == null) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Film non trovato");
 		}
-		return fil;
+		return  new ResponseEntity<FilmDTOOutProiezioni>(film, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/admin/api/film/delete/{id}")
