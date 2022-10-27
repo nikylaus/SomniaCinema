@@ -14,4 +14,5 @@ public interface IAccountService {
 	public Account saveAccount(Account account);
 	public Optional<Account> findAccountByEmail(String email);
 	public Account updateDescrizione(Integer id, String descrizione);
+	public Account updateUsername(Integer id, String username);
 }

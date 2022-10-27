@@ -1,6 +1,5 @@
 package it.somnia.controllers;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,12 +19,12 @@ import org.springframework.web.server.ResponseStatusException;
 
 import it.somnia.dto.AccountDTO;
 import it.somnia.dto.UpdateDescrProfiloDTO;
+import it.somnia.dto.UpdateUsernameDTO;
 import it.somnia.exception.NotFoundException;
 import it.somnia.model.Account;
 import it.somnia.service.AccountService;
 import lombok.SneakyThrows;
 import lombok.extern.java.Log;
-
 
 @CrossOrigin
 @RestController
@@ -38,16 +37,16 @@ public class AccountController {
 
 	@GetMapping("/api/account")
 	@SneakyThrows
-	public ResponseEntity<List<AccountDTO>>  getAllAccount() {
+	public ResponseEntity<List<AccountDTO>> getAllAccount() {
 		log.info("Otteniamo tutti gli utenti");
 		List<Account> accounts = service.getAllAccount();
-		if(accounts.isEmpty()) {
+		if (accounts.isEmpty()) {
 			String errMsg = String.format("Non e' stato trovato alcun utente");
 			log.warning(errMsg);
 			throw new NotFoundException(errMsg);
 		}
 		List<AccountDTO> listDto = new ArrayList<AccountDTO>();
-		for(Account account : accounts) {
+		for (Account account : accounts) {
 			AccountDTO accountDto = new AccountDTO();
 			accountDto.setDataIscrizione(account.getDataIscrizione());
 			accountDto.setDataNascita(account.getDataNascita());
@@ -61,7 +60,7 @@ public class AccountController {
 //			accountDto.setRuoli(account.getRuoli());
 			listDto.add(accountDto);
 		}
-		return new ResponseEntity <List<AccountDTO>>(listDto, HttpStatus.OK);
+		return new ResponseEntity<List<AccountDTO>>(listDto, HttpStatus.OK);
 	}
 
 	@GetMapping("/api/account/{id}")
@@ -99,12 +98,20 @@ public class AccountController {
 //	}
 
 	@PutMapping("/api/account/update/descrizione/{id}")
-	public UpdateDescrProfiloDTO updateDescrizione(@PathVariable Integer id, @RequestBody UpdateDescrProfiloDTO descr) {		
+	public UpdateDescrProfiloDTO updateDescrizione(@PathVariable Integer id, @RequestBody UpdateDescrProfiloDTO descr) {
 		Account acc = service.getAccountById(id);
 		acc.setDescrizioneProfilo(descr.getDescrizioneProfilo());
 		service.updateAccount(id, acc);
-	
+
 		return descr;
+	}
+
+	@PutMapping("api/account/update/username/{id}")
+	public UpdateUsernameDTO updateUsername(@PathVariable Integer id, @RequestBody UpdateUsernameDTO username) {
+		Account acc = service.getAccountById(id);
+		acc.setUsername(username.getUsername());
+		service.updateAccount(id, acc);
+		return username;
 	}
 
 	@DeleteMapping("/admin/api/account/delete/{id}")

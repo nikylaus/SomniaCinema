@@ -2,15 +2,6 @@ package it.somnia.dto;
 
 import java.sql.Date;
 
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import it.somnia.model.Account;
-import it.somnia.model.Posto;
-import it.somnia.model.Proiezione;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

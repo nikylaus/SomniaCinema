@@ -4,8 +4,6 @@ import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.springframework.web.bind.annotation.PostMapping;
-
 import it.somnia.model.Prenotazione;
 import it.somnia.model.Ruolo;
 import lombok.AllArgsConstructor;

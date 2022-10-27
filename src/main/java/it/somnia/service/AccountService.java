@@ -16,7 +16,7 @@ public class AccountService implements IAccountService {
 
 	@Autowired
 	private AccountRepository repository;
-	
+
 	@Override
 	public List<Account> getAllAccount() {
 		return (List<Account>) repository.findAll();
@@ -58,12 +58,12 @@ public class AccountService implements IAccountService {
 		}
 		return null;
 	}
-	
+
 	@Override
 	@SneakyThrows
 	public Optional<Account> findAccountByEmail(String email) {
 		Optional<Account> accOpt = repository.findByEmail(email);
-		if(accOpt.isEmpty()) {
+		if (accOpt.isEmpty()) {
 			throw new NotFoundException("Utente non trovato");
 		}
 		return repository.findByEmail(email);
@@ -72,7 +72,7 @@ public class AccountService implements IAccountService {
 	@Override
 	public Account saveAccount(Account account) {
 		Optional<Account> accountOpt = findAccountByEmail(account.getEmail());
-		if(accountOpt.isEmpty()) {
+		if (accountOpt.isEmpty()) {
 			repository.save(account);
 			return findAccountByEmail(account.getEmail()).get();
 		}
@@ -80,7 +80,7 @@ public class AccountService implements IAccountService {
 	}
 
 	@Override
-	public Account updateDescrizione(Integer id, 	String descrizione) {
+	public Account updateDescrizione(Integer id, String descrizione) {
 		Optional<Account> accountOpt = repository.findById(id);
 		if (accountOpt.isEmpty() == false) {
 			accountOpt.get().setDescrizioneProfilo(descrizione);
@@ -90,5 +90,15 @@ public class AccountService implements IAccountService {
 		return null;
 	}
 
+	@Override
+	public Account updateUsername(Integer id, String username) {
+		Optional<Account> accountOpt = repository.findById(id);
+		if (!accountOpt.isEmpty()) {
+			accountOpt.get().setUsername(username);
+			repository.save(accountOpt.get());
+			return accountOpt.get();
+		}
+		return null;
+	}
 
 }
