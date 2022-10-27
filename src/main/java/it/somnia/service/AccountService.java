@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.somnia.exception.NotFoundException;
 import it.somnia.model.Account;
 import it.somnia.repository.AccountRepository;
+import lombok.SneakyThrows;
 
 @Service
 public class AccountService implements IAccountService {
@@ -56,5 +58,37 @@ public class AccountService implements IAccountService {
 		}
 		return null;
 	}
+	
+	@Override
+	@SneakyThrows
+	public Optional<Account> findAccountByEmail(String email) {
+		Optional<Account> accOpt = repository.findByEmail(email);
+		if(accOpt.isEmpty()) {
+			throw new NotFoundException("Utente non trovato");
+		}
+		return repository.findByEmail(email);
+	}
+
+	@Override
+	public Account saveAccount(Account account) {
+		Optional<Account> accountOpt = findAccountByEmail(account.getEmail());
+		if(accountOpt.isEmpty()) {
+			repository.save(account);
+			return findAccountByEmail(account.getEmail()).get();
+		}
+		return null;
+	}
+
+	@Override
+	public Account updateDescrizione(Integer id, 	String descrizione) {
+		Optional<Account> accountOpt = repository.findById(id);
+		if (accountOpt.isEmpty() == false) {
+			accountOpt.get().setDescrizioneProfilo(descrizione);
+			repository.save(accountOpt.get());
+			return accountOpt.get();
+		}
+		return null;
+	}
+
 
 }

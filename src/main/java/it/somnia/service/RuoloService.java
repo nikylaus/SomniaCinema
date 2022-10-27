@@ -50,4 +50,9 @@ public class RuoloService implements IRuoloService{
 		return null;
 	}
 
+	@Override
+	public Optional<Ruolo> findRuoloByName(String ruolo) {
+		return repository.findByNome(ruolo);
+	}
+
 }

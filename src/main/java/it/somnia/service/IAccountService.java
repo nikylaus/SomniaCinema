@@ -1,6 +1,7 @@
 package it.somnia.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import it.somnia.model.Account;
 
@@ -10,4 +11,7 @@ public interface IAccountService {
 	public Account addAccount(Account account);
 	public Account updateAccount(Integer id, Account account);
 	public Account deleteAccountById(Integer id);
+	public Account saveAccount(Account account);
+	public Optional<Account> findAccountByEmail(String email);
+	public Account updateDescrizione(Integer id, String descrizione);
 }

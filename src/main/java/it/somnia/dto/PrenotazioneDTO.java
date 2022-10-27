@@ -29,20 +29,20 @@ public class PrenotazioneDTO {
 //	private Proiezione proiezione;
 //	private Posto posto;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_account")
-	@JsonBackReference
-	private Account accountPrenotazione; /* modificato */
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_proiezione")
-	@JsonBackReference
-	private Proiezione proiezione;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_posto")
-	@JsonBackReference
-	private Posto posto;
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "id_account")
+//	@JsonBackReference
+//	private Account accountPrenotazione; /* modificato */
+//	
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "id_proiezione")
+//	@JsonBackReference
+//	private Proiezione proiezione;
+//	
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "id_posto")
+//	@JsonBackReference
+//	private Posto posto;
 	
 
 }

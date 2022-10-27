@@ -37,9 +37,9 @@ public class FilmDTO {
 	private String imgBannerDue;
 	private String imgBannerTre;
 	
-	@OneToMany(mappedBy = "film", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JsonManagedReference /* consente di vedere i film con tutte le proiezioni */
-	private Set<Proiezione> proiezioni = new HashSet<Proiezione>();
+//	@OneToMany(mappedBy = "film", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	@JsonManagedReference /* consente di vedere i film con tutte le proiezioni */
+//	private Set<Proiezione> proiezioni = new HashSet<Proiezione>();
 	
 	
 

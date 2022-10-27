@@ -36,17 +36,17 @@ public class ProiezioneDTO {
 //	private Sala salaProiezione;
 //	private Film film;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn (name = "id_sala")
-	@JsonBackReference
-	private Sala salaProiezione;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_film")
-	@JsonBackReference /* consente di vedere il film con tutte le proiezioni */
-	private Film film;
-	
-	@OneToMany(mappedBy = "proiezione", fetch = FetchType.LAZY, cascade = CascadeType.ALL) 
-	@JsonManagedReference
-	private Set<Prenotazione> prenotazioni = new HashSet<Prenotazione>();
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn (name = "id_sala")
+//	@JsonBackReference
+//	private Sala salaProiezione;
+//	
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "id_film")
+//	@JsonBackReference /* consente di vedere il film con tutte le proiezioni */
+//	private Film film;
+//	
+//	@OneToMany(mappedBy = "proiezione", fetch = FetchType.LAZY, cascade = CascadeType.ALL) 
+//	@JsonManagedReference
+//	private Set<Prenotazione> prenotazioni = new HashSet<Prenotazione>();
 }
