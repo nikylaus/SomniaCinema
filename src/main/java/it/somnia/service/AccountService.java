@@ -101,4 +101,15 @@ public class AccountService implements IAccountService {
 		return null;
 	}
 
+	@Override
+	public Account updateImg(Integer id, String img) {
+		Optional<Account> accountOpt = repository.findById(id);
+		if (!accountOpt.isEmpty()) {
+			accountOpt.get().setImg(img);
+			repository.save(accountOpt.get());
+			return accountOpt.get();
+		}
+		return null;
+	}
+
 }

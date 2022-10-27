@@ -9,11 +9,11 @@ import it.somnia.model.Posto;
 import it.somnia.repository.PostoRepository;
 
 @Service
-public class PostoService implements IPostoService{
+public class PostoService implements IPostoService {
 
-	@Autowired 
+	@Autowired
 	private PostoRepository repository;
-	
+
 	@Override
 	public Iterable<Posto> getAllPosti() {
 		return repository.findAll();
@@ -37,7 +37,7 @@ public class PostoService implements IPostoService{
 	public Posto updatePosto(Integer id, Posto posto) {
 		Optional<Posto> postoOpt = repository.findById(id);
 		if (postoOpt.isEmpty() == false) {
-			postoOpt.get().setCondizione(posto.getCondizione());
+			postoOpt.get().setNumeroPosto(posto.getNumeroPosto());
 			repository.save(postoOpt.get());
 			return postoOpt.get();
 		}

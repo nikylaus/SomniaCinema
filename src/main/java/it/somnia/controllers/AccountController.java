@@ -19,6 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import it.somnia.dto.AccountDTO;
 import it.somnia.dto.UpdateDescrProfiloDTO;
+import it.somnia.dto.UpdateImgProfiloDTO;
 import it.somnia.dto.UpdateUsernameDTO;
 import it.somnia.exception.NotFoundException;
 import it.somnia.model.Account;
@@ -112,6 +113,14 @@ public class AccountController {
 		acc.setUsername(username.getUsername());
 		service.updateAccount(id, acc);
 		return username;
+	}
+
+	@PutMapping("api/account/update/immagine/{id}")
+	public UpdateImgProfiloDTO updateImg(@PathVariable Integer id, @RequestBody UpdateImgProfiloDTO img) {
+		Account acc = service.getAccountById(id);
+		acc.setImg(img.getImg());
+		service.updateAccount(id, acc);
+		return img;
 	}
 
 	@DeleteMapping("/admin/api/account/delete/{id}")

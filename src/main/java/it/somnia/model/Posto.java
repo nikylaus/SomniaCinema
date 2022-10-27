@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "posti")
-public class Posto implements Serializable{
+public class Posto implements Serializable {
 	/**
 	 * 
 	 */
@@ -31,14 +31,12 @@ public class Posto implements Serializable{
 	private Integer id;
 	@Column(name = "numero_posto")
 	private Integer numeroPosto;
-	private String condizione;
-	
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_sala")
+	@JoinColumn(name = "id_sala")
 	@JsonBackReference
 	private Sala sala;
-	
+
 	@OneToMany(mappedBy = "posto", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JsonManagedReference
 	private Set<Prenotazione> prenotazioni = new HashSet<Prenotazione>();
@@ -46,10 +44,9 @@ public class Posto implements Serializable{
 	public Posto() {
 	}
 
-	public Posto(Integer id, Integer numeroPosto, String condizione, Sala sala, Set<Prenotazione> prenotazioni) {
+	public Posto(Integer id, Integer numeroPosto, Sala sala, Set<Prenotazione> prenotazioni) {
 		this.id = id;
 		this.numeroPosto = numeroPosto;
-		this.condizione = condizione;
 		this.sala = sala;
 		this.prenotazioni = prenotazioni;
 	}
@@ -68,14 +65,6 @@ public class Posto implements Serializable{
 
 	public void setNumeroPosto(Integer numeroPosto) {
 		this.numeroPosto = numeroPosto;
-	}
-
-	public String getCondizione() {
-		return condizione;
-	}
-
-	public void setCondizione(String condizione) {
-		this.condizione = condizione;
 	}
 
 	public Sala getSala() {
@@ -100,12 +89,12 @@ public class Posto implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Posto [id=" + id + ", numeroPosto=" + numeroPosto + ", condizione=" + condizione + ", sala=" + sala
+		return "Posto [id=" + id + ", numeroPosto=" + numeroPosto + ", condizione=" + ", sala=" + sala
 				+ ", prenotazioni=" + prenotazioni + "]";
 	}
-	
-	public void addPrenotazione (Prenotazione prenotazione) {
+
+	public void addPrenotazione(Prenotazione prenotazione) {
 		prenotazioni.add(prenotazione);
 	}
-	
+
 }
