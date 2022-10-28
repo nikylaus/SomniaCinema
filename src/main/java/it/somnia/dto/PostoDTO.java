@@ -17,7 +17,6 @@ import lombok.Setter;
 public class PostoDTO {
 	private Integer id;
 	private Integer numeroPosto;
-	private String condizione;
 
 	private Sala sala;
 

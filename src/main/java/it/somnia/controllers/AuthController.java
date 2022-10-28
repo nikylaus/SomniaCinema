@@ -1,5 +1,6 @@
 package it.somnia.controllers;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,16 +57,16 @@ public class AuthController {
 	public ResponseEntity<InfoMsg> accountSignUp(@RequestBody AccountDTO accountDto){
 		/************ MAPPING DTO - ENTITY ******************/
 		Account account = new Account();
-		account.setDataIscrizione(accountDto.getDataIscrizione());
+		account.setDataIscrizione(new Date(System.currentTimeMillis()));
 		account.setDataNascita(accountDto.getDataNascita());
-		account.setDescrizioneProfilo(accountDto.getDescrizioneProfilo());
+		account.setDescrizioneProfilo("Modifica la tua descrizione");
 		account.setEmail(accountDto.getEmail());
 		account.setPass(passwordEncoder.encode(accountDto.getPass()));
 		log.info("Aggiungiamo il ruolo USER");
 		Ruolo ruolo = ruoloService.findRuoloByName("ROLE_USER").get();
 		account.addRuolo(ruolo);
 		log.info("user : " + account);
-		
+		log.info("data : " + new Date(System.currentTimeMillis()));
 		log.info("Salviamo l'utente con email " + account.getEmail());
 		Account nuovoAccount = accountService.saveAccount(account);
 		if(nuovoAccount == null) {
@@ -83,7 +84,7 @@ public class AuthController {
 	public LoginResponseDTO authenticate(@RequestBody LoginAccountDTO authenticationRequest) {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(),
-					authenticationRequest.getPassword()));
+					authenticationRequest.getPass()));
 		} catch (BadCredentialsException ex) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
 		}
