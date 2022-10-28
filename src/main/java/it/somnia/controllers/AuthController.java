@@ -18,9 +18,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.authentication.BadCredentialsException;
 
-import it.somnia.dto.AccountDTO;
 import it.somnia.dto.LoginAccountDTO;
 import it.somnia.dto.LoginResponseDTO;
+import it.somnia.dto.RegisterDTO;
 import it.somnia.model.Account;
 import it.somnia.model.Ruolo;
 import it.somnia.security.JWTTokenService;
@@ -54,7 +54,7 @@ public class AuthController {
 	private JWTTokenService jwtTokenService;
 	
 	@PostMapping(value="/signup")
-	public ResponseEntity<InfoMsg> accountSignUp(@RequestBody AccountDTO accountDto){
+	public ResponseEntity<InfoMsg> accountSignUp(@RequestBody RegisterDTO accountDto){
 		/************ MAPPING DTO - ENTITY ******************/
 		Account account = new Account();
 		account.setDataIscrizione(new Date(System.currentTimeMillis()));
@@ -62,12 +62,13 @@ public class AuthController {
 		account.setDescrizioneProfilo("Modifica la tua descrizione");
 		account.setEmail(accountDto.getEmail());
 		account.setPass(passwordEncoder.encode(accountDto.getPass()));
+		account.setImg("profilo1.png");
 		log.info("Aggiungiamo il ruolo USER");
 		Ruolo ruolo = ruoloService.findRuoloByName("ROLE_USER").get();
 		account.addRuolo(ruolo);
-		log.info("user : " + account);
-		log.info("data : " + new Date(System.currentTimeMillis()));
-		log.info("Salviamo l'utente con email " + account.getEmail());
+		//log.info("user : " + account);
+		//log.info("data : " + new Date(System.currentTimeMillis()));
+		//log.info("Salviamo l'utente con email " + account.getEmail());
 		Account nuovoAccount = accountService.saveAccount(account);
 		if(nuovoAccount == null) {
 			return new ResponseEntity<InfoMsg>(
@@ -94,6 +95,4 @@ public class AuthController {
 		authenticationResponse.setAccessToken(jwtTokenService.generateToken(userDetails));
 		return authenticationResponse;	
 	}
-	
-	
 }

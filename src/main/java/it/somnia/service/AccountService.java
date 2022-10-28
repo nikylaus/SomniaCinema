@@ -72,11 +72,11 @@ public class AccountService implements IAccountService {
 	@Override
 	public Account saveAccount(Account account) {
 		Optional<Account> accountOpt = findAccountByEmail(account.getEmail());
-		if (accountOpt.isEmpty()) {
-			repository.save(account);
-			return findAccountByEmail(account.getEmail()).get();
-		}
-		return null;
+//		if (accountOpt.isEmpty()) {
+//			repository.save(account);
+//			return findAccountByEmail(account.getEmail()).get();
+//		}
+		return findAccountByEmail(account.getEmail()).get();
 	}
 
 	@Override
