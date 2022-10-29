@@ -63,6 +63,7 @@ public class AuthController {
 		account.setEmail(accountDto.getEmail());
 		account.setPass(passwordEncoder.encode(accountDto.getPass()));
 		account.setImg("profilo1.png");
+		account.setUsername(accountDto.getUsername());
 		log.info("Aggiungiamo il ruolo USER");
 		Ruolo ruolo = ruoloService.findRuoloByName("ROLE_USER").get();
 		account.addRuolo(ruolo);

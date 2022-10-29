@@ -28,7 +28,7 @@ public class AccountDetailsService implements UserDetailsService{
 	@Override
 	@SneakyThrows
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Optional<Account> accountOpt = repository.findByEmail(email);
+		Optional<Account> accountOpt = repository.getByEmail(email);
 		if(accountOpt.isEmpty()) {
 			throw new NotFoundException("Utente non trovato");
 		} else {
