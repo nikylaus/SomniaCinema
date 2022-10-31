@@ -1,17 +1,20 @@
 package it.somnia.dto;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
-public class LoginAccountDTO {
+@AllArgsConstructor
+@NoArgsConstructor
+public class RegisterDTO {
 	
 	private String email;
+	private String username;
 	private String pass;
-
+	private Date dataNascita;
 }

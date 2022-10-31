@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.somnia.dto.ValutazioneDTO;
 import it.somnia.model.Prenotazione;
 import it.somnia.repository.PrenotazioneRepository;
 
@@ -34,15 +35,17 @@ public class PrenotazioneService implements IPrenotazioneService {
 	}
 
 	@Override
-	public Prenotazione updatePrenotazione(Integer id, Prenotazione prenotazione) {
+	public Prenotazione updatePrenotazione(Integer id, ValutazioneDTO valutazione) {
 		Optional<Prenotazione> prenotazioneOpt = repository.findById(id);
 		if (prenotazioneOpt.isEmpty() == false) {
-			prenotazioneOpt.get().setValutazione(prenotazione.getValutazione());
+			prenotazioneOpt.get().setValutazione(valutazione.getValutazione());
 			repository.save(prenotazioneOpt.get());
 			return prenotazioneOpt.get();
 		}
 		return null;
 	}
+	
+	
 
 	@Override
 	public Prenotazione deletePrenotazioneById(Integer id) {
@@ -53,5 +56,5 @@ public class PrenotazioneService implements IPrenotazioneService {
 		}
 		return null;
 	}
-}
 
+}

@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import it.somnia.dto.ValutazioneDTO;
 import it.somnia.model.Prenotazione;
 import it.somnia.service.PrenotazioneService;
-
 
 @CrossOrigin
 @RestController
@@ -37,16 +37,16 @@ public class PrenotazioneController {
 		return prenotazione;
 	}
 
-	@PostMapping("/admin/api/prenotazione/save") 
+	@PostMapping("/admin/api/prenotazione/save")
 	public Prenotazione save(@RequestBody Prenotazione prenotazione) {
 		System.err.println(prenotazione);
-		service.addPrenotazione(prenotazione); //bisogna a
+		service.addPrenotazione(prenotazione); // bisogna a
 		return prenotazione;
 	}
 
 	@PutMapping("/admin/api/prenotazione/update/{id}")
-	public Prenotazione update(@PathVariable Integer id, @RequestBody Prenotazione prenotazione) {
-		Prenotazione pren = service.updatePrenotazione(id, prenotazione);
+	public Prenotazione update(@PathVariable Integer id, @RequestBody ValutazioneDTO valutazione) {
+		Prenotazione pren = service.updatePrenotazione(id, valutazione);
 		if (pren == null) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Prenotazione non trovata");
 		}

@@ -2,6 +2,7 @@ package it.somnia.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +36,27 @@ public class AccountController {
 
 	@Autowired
 	private AccountService service;
+	
+	
+	@GetMapping("/api/email/{email}")
+	public AccountDTO getByEmail(@PathVariable String email) {
+		Optional<Account> accOpt = service.getAccountByEmail(email);
+		if (accOpt == null) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account non trovato");
+		}
+		Account account = accOpt.get();
+		AccountDTO accountDto = new AccountDTO();
+		accountDto.setDataIscrizione(account.getDataIscrizione());
+		accountDto.setDataNascita(account.getDataNascita());
+		accountDto.setEmail(account.getEmail());
+		accountDto.setImg(account.getImg());
+		accountDto.setDescrizioneProfilo(account.getDescrizioneProfilo());
+		accountDto.setPass(account.getPass());
+		accountDto.setUsername(account.getUsername());
+		accountDto.setPrenotazioni(account.getPrenotazioni());
+//		accountDto.setRuoli(account.getRuoli());
+		return accountDto;
+	}
 
 	@GetMapping("/api/account")
 	@SneakyThrows
