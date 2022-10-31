@@ -112,6 +112,7 @@ public class AccountController {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account non trovato");
 		}
 		AccountDTO accountDto = new AccountDTO();
+		accountDto.setId(account.getId());
 		accountDto.setDataIscrizione(account.getDataIscrizione());
 		accountDto.setDataNascita(account.getDataNascita());
 		accountDto.setEmail(account.getEmail());
@@ -139,7 +140,7 @@ public class AccountController {
 //		return accountDto;
 //	}
 
-	@PutMapping("/api/account/update/descrizione/{id}")
+	@PutMapping("/user/api/account/update/descrizione/{id}")
 	public UpdateDescrProfiloDTO updateDescrizione(@PathVariable Integer id, @RequestBody UpdateDescrProfiloDTO descr) {
 		Account acc = service.getAccountById(id);
 		acc.setDescrizioneProfilo(descr.getDescrizioneProfilo());
@@ -148,7 +149,7 @@ public class AccountController {
 		return descr;
 	}
 
-	@PutMapping("api/account/update/username/{id}")
+	@PutMapping("/user/api/account/update/username/{id}")
 	public UpdateUsernameDTO updateUsername(@PathVariable Integer id, @RequestBody UpdateUsernameDTO username) {
 		Account acc = service.getAccountById(id);
 		acc.setUsername(username.getUsername());
@@ -156,12 +157,13 @@ public class AccountController {
 		return username;
 	}
 
-	@PutMapping("api/account/update/immagine/{id}")
-	public UpdateImgProfiloDTO updateImg(@PathVariable Integer id, @RequestBody UpdateImgProfiloDTO img) {
+	@PutMapping("/user/api/account/update/immagine/{id}")
+	public UpdateImgProfiloDTO updateImg(@PathVariable Integer id, @RequestBody UpdateImgProfiloDTO immagine) {
+		System.err.println(immagine.getImmagine());
 		Account acc = service.getAccountById(id);
-		acc.setImg(img.getImg());
+		acc.setImg(immagine.getImmagine());
 		service.updateAccount(id, acc);
-		return img;
+		return immagine;
 	}
 
 	@DeleteMapping("/admin/api/account/delete/{id}")
