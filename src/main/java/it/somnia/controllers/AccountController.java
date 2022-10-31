@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import it.somnia.dto.AccountDTO;
+import it.somnia.dto.AccountInfoDTO;
 import it.somnia.dto.UpdateDescrProfiloDTO;
 import it.somnia.dto.UpdateImgProfiloDTO;
 import it.somnia.dto.UpdateUsernameDTO;
@@ -37,24 +38,42 @@ public class AccountController {
 	@Autowired
 	private AccountService service;
 	
-	
-	@GetMapping("/api/email/{email}")
-	public AccountDTO getByEmail(@PathVariable String email) {
-		Optional<Account> accOpt = service.getAccountByEmail(email);
+	@GetMapping("/api/username/{username}")
+	public AccountInfoDTO getByUsername(@PathVariable String username) {
+		Optional<Account> accOpt = service.getAccountByUsername(username);
 		if (accOpt == null) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account non trovato");
 		}
 		Account account = accOpt.get();
-		AccountDTO accountDto = new AccountDTO();
+		AccountInfoDTO accountDto = new AccountInfoDTO();
 		accountDto.setDataIscrizione(account.getDataIscrizione());
 		accountDto.setDataNascita(account.getDataNascita());
 		accountDto.setEmail(account.getEmail());
 		accountDto.setImg(account.getImg());
 		accountDto.setDescrizioneProfilo(account.getDescrizioneProfilo());
-		accountDto.setPass(account.getPass());
 		accountDto.setUsername(account.getUsername());
 		accountDto.setPrenotazioni(account.getPrenotazioni());
-//		accountDto.setRuoli(account.getRuoli());
+		accountDto.setRuoli(account.getRuoli());
+		return accountDto;
+	}
+	
+	
+	@GetMapping("/api/email/{email}")
+	public AccountInfoDTO getByEmail(@PathVariable String email) {
+		Optional<Account> accOpt = service.getAccountByEmail(email);
+		if (accOpt == null) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account non trovato");
+		}
+		Account account = accOpt.get();
+		AccountInfoDTO accountDto = new AccountInfoDTO();
+		accountDto.setDataIscrizione(account.getDataIscrizione());
+		accountDto.setDataNascita(account.getDataNascita());
+		accountDto.setEmail(account.getEmail());
+		accountDto.setImg(account.getImg());
+		accountDto.setDescrizioneProfilo(account.getDescrizioneProfilo());
+		accountDto.setUsername(account.getUsername());
+		accountDto.setPrenotazioni(account.getPrenotazioni());
+		accountDto.setRuoli(account.getRuoli());
 		return accountDto;
 	}
 
@@ -80,7 +99,7 @@ public class AccountController {
 			accountDto.setPass(account.getPass());
 			accountDto.setUsername(account.getUsername());
 			accountDto.setPrenotazioni(account.getPrenotazioni());
-//			accountDto.setRuoli(account.getRuoli());
+			accountDto.setRuoli(account.getRuoli());
 			listDto.add(accountDto);
 		}
 		return new ResponseEntity<List<AccountDTO>>(listDto, HttpStatus.OK);

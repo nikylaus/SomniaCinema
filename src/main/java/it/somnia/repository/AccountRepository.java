@@ -11,4 +11,5 @@ import it.somnia.model.Account;
 public interface AccountRepository extends CrudRepository<Account, Integer> {
 
 	Optional<Account> getByEmail(String email);
+	Optional<Account> getByUsername(String username);
 }

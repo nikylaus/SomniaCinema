@@ -35,7 +35,7 @@ public class Account implements Serializable {
 	private String pass;
 	private String img;
 	
-	@Column(name = "descrizione_profilo")
+	@Column(name = "descrizione_profilo", length= 1000)
 	private String descrizioneProfilo;
 	@Column(name = "data_iscrizione")
 	private Date dataIscrizione;
@@ -55,7 +55,6 @@ public class Account implements Serializable {
 
 	public Account() {
 	}
-
 
 
 	public Account(String username, String email, String pass, String img, String descrizioneProfilo,

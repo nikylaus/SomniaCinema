@@ -60,16 +60,6 @@ public class AccountService implements IAccountService {
 	}
 
 	@Override
-	@SneakyThrows
-	public Optional<Account> getAccountByEmail(String email) {
-		Optional<Account> accOpt = repository.getByEmail(email);
-//		if (accOpt.isEmpty()) {
-//			throw new NotFoundException("Utente non trovato");
-//		}
-		return repository.getByEmail(email);
-	}
-
-	@Override
 	public Account saveAccount(Account account) {
 		Optional<Account> accountOpt = getAccountByEmail(account.getEmail());
 		if (accountOpt.isEmpty()) {
@@ -110,6 +100,26 @@ public class AccountService implements IAccountService {
 			return accountOpt.get();
 		}
 		return null;
+	}
+	
+	@Override
+	@SneakyThrows
+	public Optional<Account> getAccountByEmail(String email) {
+		Optional<Account> accOpt = repository.getByEmail(email);
+//		if (accOpt.isEmpty()) {
+//			throw new NotFoundException("Utente non trovato");
+//		}
+		return repository.getByEmail(email);
+	}
+	
+	@SneakyThrows
+	@Override
+	public Optional<Account> getAccountByUsername(String username) {
+		Optional<Account> accOpt = repository.getByUsername(username);
+		if (accOpt.isEmpty()) {
+			throw new NotFoundException("Utente non trovato");
+		}
+		return accOpt;
 	}
 
 }
