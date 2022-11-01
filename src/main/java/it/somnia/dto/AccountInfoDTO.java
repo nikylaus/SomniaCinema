@@ -18,6 +18,7 @@ import lombok.Setter;
 @Setter
 public class AccountInfoDTO {
 	
+	private Integer id;
 	private String username;
 	private String email;
 	private String img;

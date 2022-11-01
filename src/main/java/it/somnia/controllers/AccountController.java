@@ -20,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import it.somnia.dto.AccountDTO;
 import it.somnia.dto.AccountInfoDTO;
+import it.somnia.dto.AccountUsernameDescrDTO;
 import it.somnia.dto.UpdateDescrProfiloDTO;
 import it.somnia.dto.UpdateImgProfiloDTO;
 import it.somnia.dto.UpdateUsernameDTO;
@@ -46,6 +47,7 @@ public class AccountController {
 		}
 		Account account = accOpt.get();
 		AccountInfoDTO accountDto = new AccountInfoDTO();
+		accountDto.setId(account.getId());
 		accountDto.setDataIscrizione(account.getDataIscrizione());
 		accountDto.setDataNascita(account.getDataNascita());
 		accountDto.setEmail(account.getEmail());
@@ -66,6 +68,7 @@ public class AccountController {
 		}
 		Account account = accOpt.get();
 		AccountInfoDTO accountDto = new AccountInfoDTO();
+		accountDto.setId(account.getId());
 		accountDto.setDataIscrizione(account.getDataIscrizione());
 		accountDto.setDataNascita(account.getDataNascita());
 		accountDto.setEmail(account.getEmail());
@@ -164,6 +167,18 @@ public class AccountController {
 		acc.setImg(immagine.getImmagine());
 		service.updateAccount(id, acc);
 		return immagine;
+	}
+	
+	@PutMapping("/user/api/account/update/usernamedescr/{id}")
+	public AccountUsernameDescrDTO updateUsernameDescr(@PathVariable Integer id, @RequestBody AccountUsernameDescrDTO usernameDescr) {
+		Account acc = service.getAccountById(id);
+		if(acc != null) {
+			acc.setUsername(usernameDescr.getUsername());
+			acc.setDescrizioneProfilo(usernameDescr.getDescrizione());
+			service.updateAccount(id, acc);
+			return usernameDescr;
+		}
+		return null;
 	}
 
 	@DeleteMapping("/admin/api/account/delete/{id}")
