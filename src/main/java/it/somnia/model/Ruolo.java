@@ -4,18 +4,15 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table (name = "ruolo")
@@ -29,21 +26,11 @@ public class Ruolo implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@Column(name="nome", unique = true, nullable = false)
 	private String nome;
-
-	@ManyToMany(fetch = FetchType.LAZY,  
-			cascade = CascadeType.MERGE) 
-	@JoinTable(name = "ruoli_account",
-	joinColumns = {  
-			@JoinColumn(name = "id_ruolo",   
-					referencedColumnName = "id") 
-	},  
-	inverseJoinColumns = {  
-			@JoinColumn(name = "id_account",   
-					referencedColumnName = "id") 
-	}) 
-	@JsonBackReference /* visualizza solo i ruoli */
-	//@JsonManagedReference
+	//@JsonBackReference /* visualizza solo i ruoli */
+	@ManyToMany(mappedBy = "ruoli")
+	@JsonManagedReference
 	private Set<Account> account = new HashSet<Account>();
 
 	public Ruolo() {

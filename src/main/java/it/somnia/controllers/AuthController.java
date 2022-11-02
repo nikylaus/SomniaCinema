@@ -67,7 +67,7 @@ public class AuthController {
 		log.info("Aggiungiamo il ruolo USER");
 		Ruolo ruolo = ruoloService.findRuoloByName("ROLE_USER").get();
 		account.addRuolo(ruolo);
-		//log.info("user : " + account);
+		System.err.println("ROLE : " + ruolo.getNome());
 		//log.info("data : " + new Date(System.currentTimeMillis()));
 		//log.info("Salviamo l'utente con email " + account.getEmail());
 		Account nuovoAccount = accountService.saveAccount(account);

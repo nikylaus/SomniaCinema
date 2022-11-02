@@ -12,10 +12,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -47,8 +50,20 @@ public class Account implements Serializable {
 	@JsonManagedReference /* consente di vedere l'account insieme alle prenotazioni */
 	private Set<Prenotazione> prenotazioni = new HashSet<Prenotazione>();
 	
-	@ManyToMany(mappedBy = "account")
-	@JsonManagedReference /* consente di vedere l'account insieme ai ruoli */
+
+	@ManyToMany(fetch = FetchType.LAZY,  
+			cascade = CascadeType.MERGE) 
+	@JoinTable(name = "ruoli_account",
+	joinColumns = {  
+			@JoinColumn(name = "id_account",   
+					referencedColumnName = "id") 
+	},  
+	inverseJoinColumns = {  
+			@JoinColumn(name = "id_ruolo",   
+					referencedColumnName = "id") 
+	})
+	@JsonBackReference
+	//@JsonManagedReference /* consente di vedere l'account insieme ai ruoli */
 	private Set<Ruolo> ruoli = new HashSet<Ruolo>();
 	
 	
