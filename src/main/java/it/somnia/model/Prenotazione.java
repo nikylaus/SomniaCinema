@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "prenotazioni")
@@ -45,6 +46,7 @@ public class Prenotazione implements Serializable{
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_posto")
 	@JsonBackReference
+	//@JsonManagedReference
 	private Posto posto;
 
 	public Prenotazione() {

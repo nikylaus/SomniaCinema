@@ -37,8 +37,9 @@ public class Posto implements Serializable {
 	@JsonBackReference
 	private Sala sala;
 
-	@OneToMany(mappedBy = "posto", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "posto",fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference
+	//@JsonBackReference
 	private Set<Prenotazione> prenotazioni = new HashSet<Prenotazione>();
 
 	public Posto() {
