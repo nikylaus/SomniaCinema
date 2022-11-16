@@ -39,13 +39,12 @@ public class JWTSecurityConfig {
                 .authorizeRequests()
                         .antMatchers("api/auth/signup").permitAll() //accesso senza autenticazione
                         .antMatchers("api/auth/login").permitAll()
-                        .antMatchers("api/user", "/api/user/**").hasRole("USER")
-                        .antMatchers("api/admin", "/api/admin/**").hasRole("ADMIN").and()
+                        .antMatchers("user/api", "/user/api**").hasRole("USER")
+                        .antMatchers("admin/api", "/admin/api/**").hasRole("ADMIN").and()
                         //anyRequest().authenticated().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
-
 }
 
